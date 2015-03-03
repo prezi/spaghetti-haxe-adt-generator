@@ -1,0 +1,34 @@
+buildscript {
+	repositories {
+		mavenLocal()
+		maven {
+			credentials {
+				username nexusUser
+				password nexusPassword
+			}
+			url "https://artifactory.prezi.com/plugins"
+		}
+	}
+
+	dependencies {
+		classpath "com.prezi.gradle:gradle-prezi-plugin:5.+"
+	}
+}
+
+group "com.prezi.spaghetti"
+
+apply plugin: "groovy"
+apply plugin: "idea"
+apply plugin: "maven"
+apply plugin: "prezi"
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven preziDownloadRepo("plugins")
+}
+
+dependencies {
+    compile "com.prezi.spaghetti:spaghetti-core:2.1-alpha-2-64-gb3c5ba1"
+	compile localGroovy()
+}
